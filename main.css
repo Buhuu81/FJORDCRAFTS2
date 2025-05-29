@@ -1,0 +1,151 @@
+/* --- Styles for the Main Content Page (main.html) --- */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* Re-enabled, as primary layout issues should be fixed */
+  font-family: Arial, sans-serif;
+  color: #333; /* Default text color */
+}
+
+.main-page-wrapper {
+  width: 100%;
+  height: 100%;
+  /* --- Background Image --- */
+  background-image: url('background.png');
+  background-size: cover;          
+  background-position: center center; 
+  background-repeat: no-repeat;    
+  background-attachment: fixed;    
+  
+  position: relative;
+  display: flex;
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: space-between; /* This spaces logo (top), content (middle), social (bottom) */
+  box-sizing: border-box;
+  padding: 20px;
+
+  
+}
+
+/* --- Styles for the Logo on the MAIN PAGE --- */
+.main-page-logo-link {
+  justify-content: center;
+  top: 20px;          
+  left: 20px;         
+  z-index: 20;        
+  display: block;
+  line-height: 0;
+
+  /* DEBUGGING AIDS */
+  /* border: 2px solid green; */
+}
+
+.main-page-logo {
+  max-width: 400px;
+  height: auto;     
+  display: block;   
+  cursor: pointer;
+  transition: transform 0.5s ease-in-out;
+}
+
+.main-page-logo:hover {
+  transform: scale(1.1);
+}
+
+/* --- Main Content Area for Horizontal Links --- */
+.main-content-area {
+  flex-grow: 1; /* Allows this area to take up available vertical space */
+  display: flex;
+  flex-direction: column; /* This keeps horizontal-links-container below potential other content */
+  justify-content: center; /* Vertically centers the horizontal-links-container */
+  align-items: center; /* Horizontally centers the horizontal-links-container */
+  width: 100%; 
+  max-width: none; /* IMPORTANT: Removed max-width to allow it to grow horizontally */
+  margin-top: 80px; 
+  margin-bottom: 20px; 
+  padding: 10px; 
+  box-sizing: border-box;
+
+  /* DEBUGGING AIDS */
+  /* border: 3px solid blue; */
+}
+
+.horizontal-links-container {
+  display: flex;
+  justify-content: center; /* Center the image links horizontally */
+  align-items: center;
+  gap: 15px; /* Adjusted gap for visual appeal */
+  /* Removed flex-wrap: wrap; - this is the key to keeping them on one line */
+  /* width: 100%; Removed this to allow content to dictate width */
+  min-width: 0; /* Allows content to shrink beyond its intrinsic size if needed */
+
+}
+
+.content-link-item {
+  text-align: center;
+  text-decoration: none;
+  color: inherit;
+  /* Adjusted flex properties for horizontal scaling */
+  flex: 1 1 180px; /* flex-grow (can grow), flex-shrink (can shrink), base-width (start at 180px) */
+  /* Removed max-width here, let flex handle it */
+  min-width: 100px; /* Allow items to shrink down to a minimum of 100px before overflow */
+  box-sizing: border-box;
+  padding: 5px; /* Added slight padding inside each item for spacing text from image */
+}
+
+.content-link-item img {
+  width: 100%; /* Image takes full width of its parent */
+  height: auto; /* Maintain aspect ratio */
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.content-link-item img:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.content-link-item span {
+  display: block;
+  margin-top: 8px;
+  font-weight: bold;
+  font-size: 2em;
+  color: #eee;
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
+  white-space: nowrap; /* Prevent text from wrapping within the span */
+  overflow: hidden; /* Hide overflow if text is too long */
+  text-overflow: ellipsis; /* Add ellipsis (...) if text is too long */
+}
+
+/* --- Social Media Links at the bottom --- */
+.social-links-container {
+  display: flex;
+  justify-content: center; /* Center social links */
+  gap: 15px; /* Adjusted gap */
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* Removed flex-wrap: wrap; for social links as well */
+  min-width: 0; /* Allows content to shrink */
+
+  /* DEBUGGING AIDS */
+  /* border: 2px solid orange; */
+}
+
+.social-link img {
+  width: 35px; /* Slightly larger for better tap targets */
+  height: 35px;
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.social-link img:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
