@@ -1,105 +1,100 @@
-/* --- Styles for the Main Content Page (main.html) --- */
-
+/* --- Global Base Styles (Applies to main.html only) --- */
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow: hidden; /* Re-enabled, as primary layout issues should be fixed */
+  overflow: hidden; /* Prevents all scrolling on this page for a fixed screen */
   font-family: Arial, sans-serif;
-  color: #333; /* Default text color */
+  color: #f0f0f0; /* Default text color for the site */
 }
 
+/* --- Main Page Wrapper (This acts as the background container and main layout container) --- */
 .main-page-wrapper {
-  width: 100%;
-  height: 100%;
-  /* --- Background Image --- */
+  width: 100vw; /* Explicitly set to 100% of viewport width */
+  height: 100vh; /* Explicitly set to 100% of viewport height to ensure background is visible */
   background-image: url('background.png');
-  background-size: cover;          
-  background-position: center center; 
-  background-repeat: no-repeat;    
-  background-attachment: fixed;    
-  
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   position: relative;
-  display: flex;
-  flex-direction: column; 
-  align-items: center; 
+
+  display: flex; /* Use flexbox for layout of its children (logo, content, footer) */
+  flex-direction: column; /* Stack children vertically */
+  align-items: center; /* Horizontally centers all direct children */
   justify-content: space-between; /* This spaces logo (top), content (middle), social (bottom) */
+
   box-sizing: border-box;
-  padding: 20px;
-
-  
+  padding: 20px; /* Overall padding for the wrapper */
 }
 
-/* --- Styles for the Logo on the MAIN PAGE --- */
-.main-page-logo-link {
-  justify-content: center;
-  top: 20px;          
-  left: 20px;         
-  z-index: 20;        
-  display: block;
-  line-height: 0;
-
-  /* DEBUGGING AIDS */
-  /* border: 2px solid green; */
+/* --- Logo Link and Image (on the MAIN PAGE) --- */
+.main-page-logo-link { /* This is the element you referred to as .logo-link */
+  display: block; /* Ensures it acts as a block and responds to text-align/margin auto */
+  line-height: 0; /* Removes any extra space below the image */
+  margin-bottom: 20px; /* Adds space between logo and the main content area */
+  /* Remove top/left/z-index as flexbox handles positioning relative to the wrapper */
+  /* justify-content: center; is for flex containers, not direct elements. Text-align: center on parent is better. */
+  text-align: center; /* Centers the image if the link isn't full width */
 }
 
-.main-page-logo {
-  max-width: 400px;
-  height: auto;     
-  display: block;   
+.main-page-logo { /* This is the element you referred to as .logo */
+  max-width: 400px; /* Maximum width for the logo */
+  max-height: 25vh; /* CRITICAL: Limit logo height to 25% of viewport height to prevent it from dominating */
+  height: auto;     /* Maintain aspect ratio */
+  display: block;   /* Ensures image takes up only its content box */
   cursor: pointer;
   transition: transform 0.5s ease-in-out;
 }
 
 .main-page-logo:hover {
-  transform: scale(1.1);
+  transform: scale(1.2); /* Reverting to a more manageable scale for fixed layouts */
 }
 
-/* --- Main Content Area for Horizontal Links --- */
+/* --- Main Content Area for Horizontal Links (will be centered vertically) --- */
 .main-content-area {
-  flex-grow: 1; /* Allows this area to take up available vertical space */
+  flex-grow: 1; /* Allows this area to take up available vertical space between logo and social links */
   display: flex;
-  flex-direction: column; /* This keeps horizontal-links-container below potential other content */
-  justify-content: center; /* Vertically centers the horizontal-links-container */
-  align-items: center; /* Horizontally centers the horizontal-links-container */
-  width: 100%; 
-  max-width: none; /* IMPORTANT: Removed max-width to allow it to grow horizontally */
-  margin-top: 80px; 
-  margin-bottom: 20px; 
-  padding: 10px; 
+  flex-direction: column; /* This keeps horizontal-links-container below potential other content if any */
+  justify-content: center; /* Vertically centers the horizontal-links-container within this area */
+  align-items: center; /* Horizontally centers the horizontal-links-container within this area */
+  width: 100%;
+  max-width: none; /* Allows it to expand horizontally as needed */
+  /* Removed specific margins like margin-top: 80px; margin-bottom: 20px; because flex-grow and justify-content handle spacing */
+  padding: 10px;
   box-sizing: border-box;
-
-  /* DEBUGGING AIDS */
-  /* border: 3px solid blue; */
 }
 
 .horizontal-links-container {
   display: flex;
   justify-content: center; /* Center the image links horizontally */
-  align-items: center;
-  gap: 15px; /* Adjusted gap for visual appeal */
-  /* Removed flex-wrap: wrap; - this is the key to keeping them on one line */
-  /* width: 100%; Removed this to allow content to dictate width */
-  min-width: 0; /* Allows content to shrink beyond its intrinsic size if needed */
-
+  align-items: center; /* Vertically align items if they have different heights */
+  gap: 15px; /* Space between items */
+  flex-wrap: wrap; /* IMPORTANT: Re-added flex-wrap so items go to next line if needed */
+  max-width: 90%; /* Constrain the overall width of the row of links */
+  margin: 0 auto; /* Center the container itself */
 }
 
 .content-link-item {
   text-align: center;
   text-decoration: none;
-  color: inherit;
-  /* Adjusted flex properties for horizontal scaling */
-  flex: 1 1 180px; /* flex-grow (can grow), flex-shrink (can shrink), base-width (start at 180px) */
-  /* Removed max-width here, let flex handle it */
-  min-width: 100px; /* Allow items to shrink down to a minimum of 100px before overflow */
+  color: #f0f0f0; /* Ensure text color is light */
+  flex: 0 0 180px; /* flex-grow (0 - no grow), flex-shrink (0 - no shrink), base-width (180px) */
+  /* This locks the size of each item unless a media query changes it */
   box-sizing: border-box;
-  padding: 5px; /* Added slight padding inside each item for spacing text from image */
+  padding: 5px;
+  display: flex;
+  flex-direction: column; /* Stack image and text vertically */
+  align-items: center; /* Center image and text horizontally within the item */
+  min-width: 100px; /* Allow items to shrink down to a minimum on very small screens */
 }
 
 .content-link-item img {
-  width: 100%; /* Image takes full width of its parent */
+  width: 100%; /* Image takes full width of its parent (.content-link-item) */
   height: auto; /* Maintain aspect ratio */
+  max-height: 180px; /* Constrain image height */
+  object-fit: cover; /* Covers the area, cropping if needed */
   display: block;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -115,30 +110,28 @@ body, html {
   display: block;
   margin-top: 8px;
   font-weight: bold;
-  font-size: 2em;
+  font-size: 1.5em; /* Adjusted font size for better fit */
   color: #eee;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.7);
-  white-space: nowrap; /* Prevent text from wrapping within the span */
-  overflow: hidden; /* Hide overflow if text is too long */
-  text-overflow: ellipsis; /* Add ellipsis (...) if text is too long */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* --- Social Media Links at the bottom --- */
 .social-links-container {
+  width: 100%;
   display: flex;
-  justify-content: center; /* Center social links */
-  gap: 15px; /* Adjusted gap */
+  justify-content: center;
+  gap: 15px;
   padding-top: 10px;
   padding-bottom: 10px;
-  /* Removed flex-wrap: wrap; for social links as well */
-  min-width: 0; /* Allows content to shrink */
-
-  /* DEBUGGING AIDS */
-  /* border: 2px solid orange; */
+  margin-top: 20px; /* Add some space above the footer */
+  flex-shrink: 0; /* Prevents footer from shrinking too much if content area is very large */
 }
 
 .social-link img {
-  width: 35px; /* Slightly larger for better tap targets */
+  width: 35px;
   height: 35px;
   border-radius: 50%;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -148,4 +141,61 @@ body, html {
 .social-link img:hover {
   transform: scale(1.2);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* --- Responsive Adjustments for main.html --- */
+@media (max-width: 768px) {
+    .main-page-logo {
+        max-width: 250px;
+        max-height: 20vh;
+    }
+
+    .horizontal-links-container {
+        gap: 10px;
+        max-width: 100%;
+    }
+
+    .content-link-item {
+        flex: 0 0 150px; /* Adjust base width for smaller screens */
+        min-width: 120px;
+    }
+
+    .content-link-item img {
+        max-height: 120px;
+    }
+
+    .content-link-item span {
+        font-size: 1.2em;
+    }
+}
+
+@media (max-width: 480px) {
+    .main-page-logo {
+        max-width: 180px;
+        max-height: 15vh;
+    }
+
+    .horizontal-links-container {
+        gap: 8px;
+    }
+
+    .content-link-item {
+        flex: 0 0 100px; /* Even smaller base width for very small screens */
+        min-width: 90px;
+        padding: 2px;
+    }
+
+    .content-link-item img {
+        max-height: 80px;
+    }
+
+    .content-link-item span {
+        font-size: 0.9em;
+        margin-top: 5px;
+    }
+
+    .social-link img {
+        width: 30px;
+        height: 30px;
+    }
 }
